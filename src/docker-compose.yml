@@ -6,9 +6,34 @@ services:
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile 
+    networks:
+      - backend
 
   catalogdb:
     image: postgres:latest
+    networks:
+      - backend
+  basketdb:
+    image: postgres
+  
+  distributedcache:
+    image: redis
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "15432:80"
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+  backend:
 
 volumes:
   postgres_catalog:
+  postgres_basket:  

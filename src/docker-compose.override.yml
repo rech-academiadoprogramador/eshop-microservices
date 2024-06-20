@@ -26,4 +26,43 @@ services:
     ports:
         - "5432:5432"
     volumes:
-      - postgres_catalog:/var/lib/postgresql/data/ 
+      - postgres_catalog:/var/lib/postgresql/data/
+    networks:
+      - backend
+
+  basketdb:
+    container_name: basketdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=BasketDb
+    restart: always
+    ports:
+        - "5433:5432"
+    volumes:
+      - postgres_basket:/var/lib/postgresql/data/
+    networks:
+      - backend
+  
+  distributedcache:
+    container_name: distributedcache
+    restart: always
+    ports:
+      - "6379:6379"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    restart: always
+    ports:
+      - "15432:80"
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+  backend:
