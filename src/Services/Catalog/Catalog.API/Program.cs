@@ -35,7 +35,7 @@ builder.Services.AddCarter();
 
 var app = builder.Build();
 
-app.UseExceptionHandler(e => {});
+app.UseExceptionHandler(e => { });
 
 app.UseHealthChecks("/health",
     new HealthCheckOptions

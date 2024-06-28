@@ -63,7 +63,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: postgres
     restart: always
     ports:
-      - "15432:80"
+      - "15432:80"    
 
   basket.api:
     environment:
