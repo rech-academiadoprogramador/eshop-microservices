@@ -25,3 +25,5 @@ global using Microsoft.EntityFrameworkCore;
 global using MassTransit;
 
 global using BuildingBlocks.Messaging.Events;
+
+global using Microsoft.FeatureManagement;

@@ -13,4 +13,8 @@ public record OrderId
 
         return new OrderId(value);
     }
+
+    public static implicit operator Guid(OrderId self) => self.Value;
+
+    public static explicit operator OrderId(Guid value) => new OrderId(value);
 }

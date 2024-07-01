@@ -16,20 +16,20 @@ public static class Extentions
             if (assembly != null)
                 config.AddConsumers(assembly);
 
-            config.UsingInMemory((context, cfg) =>
-            {
-                cfg.ConfigureEndpoints(context);
-            });
-
-            //config.UsingRabbitMq((context, configurator) =>
+            //config.UsingInMemory((context, cfg) =>
             //{
-            //    configurator.Host(new Uri(configuration["MessageBroker:Host"]!), host =>
-            //    {
-            //        host.Username(configuration["MessageBroker:UserName"]);
-            //        host.Password(configuration["MessageBroker:Password"]);
-            //    });
-            //    configurator.ConfigureEndpoints(context);
+            //    cfg.ConfigureEndpoints(context);
             //});
+
+            config.UsingRabbitMq((context, configurator) =>
+            {
+                configurator.Host(new Uri(configuration["MessageBroker:Host"]!), host =>
+                {
+                    host.Username(configuration["MessageBroker:UserName"]!);
+                    host.Password(configuration["MessageBroker:Password"]!);
+                });
+                configurator.ConfigureEndpoints(context);
+            });
         });
 
         return services;
